@@ -1,6 +1,6 @@
 import { Component, type OnInit } from "@angular/core";
 import { type Observable, of } from "rxjs";
-import type { OlympicService } from "src/app/core/services/olympic.service";
+import { OlympicService } from "src/app/core/services/olympic.service";
 
 @Component({
 	selector: "app-home",

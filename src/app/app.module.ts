@@ -1,15 +1,21 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { NotFoundComponent } from "./pages/not-found/not-found.component";
+import { PiechartComponent } from "./ui/piechart/piechart.component";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
-  bootstrap: [AppComponent],
+	declarations: [AppComponent, HomeComponent, NotFoundComponent],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		PiechartComponent,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}
