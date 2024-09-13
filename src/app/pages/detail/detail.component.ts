@@ -11,7 +11,7 @@ import { OlympicService } from "src/app/core/services/olympic.service";
 	styleUrl: "./detail.component.scss",
 })
 export class DetailComponent implements OnInit {
-	public olympics$: Observable<any> = of(null);
+	public olympics$: Observable<Olympic[] | null> = of(null);
 
 	countryName = "";
 	numberOfEntries = 0;

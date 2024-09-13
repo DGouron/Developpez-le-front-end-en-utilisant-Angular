@@ -12,7 +12,7 @@ import { OlympicService } from "src/app/core/services/olympic.service";
 	styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-	public olympics$: Observable<any> = of(null);
+	public olympics$: Observable<Olympic[] | null> = of(null);
 
 	numberOfCountries = 0;
 	numberOfGames = 0;
@@ -25,7 +25,10 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.olympics$ = this.olympicService.getOlympics();
-		this.olympics$.subscribe((olympics: Olympic[]) => {
+		this.olympics$.subscribe((olympics: Olympic[] | null) => {
+			if (!olympics) {
+				return;
+			}
 			this.numberOfGames = this.calculateNumberOfGames(olympics);
 			this.numberOfCountries = this.calculateNumberOfCountries(olympics);
 			this.dataset = olympics?.map((item: Olympic) => ({
