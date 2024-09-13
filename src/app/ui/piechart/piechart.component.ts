@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { Data } from "src/app/core/models/Data";
 
 @Component({
 	selector: "app-piechart",
@@ -9,49 +11,16 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 	styleUrl: "./piechart.component.scss",
 })
 export class PiechartComponent {
-	title = "barchartApp";
-	dataset = [
-		{
-			name: "Germany",
-			value: 40632,
-			extra: {
-				code: "de",
-			},
-		},
-		{
-			name: "United States",
-			value: 50000,
-			extra: {
-				code: "us",
-			},
-		},
-		{
-			name: "France",
-			value: 36745,
-			extra: {
-				code: "fr",
-			},
-		},
-		{
-			name: "United Kingdom",
-			value: 36240,
-			extra: {
-				code: "uk",
-			},
-		},
-		{
-			name: "Spain",
-			value: 33000,
-			extra: {
-				code: "es",
-			},
-		},
-		{
-			name: "Italy",
-			value: 35800,
-			extra: {
-				code: "it",
-			},
-		},
-	];
+	title = "piechart";
+
+	@Input() dataset: Data[] = [];
+	@Output() selectedValue = new EventEmitter<any>();
+
+	onSelect(event: {
+		name: string;
+		value: string;
+		extra: any;
+	}): void {
+		this.selectedValue.emit(event);
+	}
 }

@@ -1,10 +1,8 @@
-<h2>Olympic games app</h2>
-<hr />
 <section class="home--section">
-  <h3 class="title">Medals per Country</h3>
+  <app-title-item titleToShow="Medals per Country"></app-title-item>
   <div class="medals--row">
-    <p class="stat"><span class="name">Number of JOs</span><span class="value">{{ numberOfGames }}</span></p>
-    <p class="stat"><span class="name">Number of countries</span><span class="value">{{ numberOfCountries }}</span></p>
+    <app-stat-item label="Number of JOs" [value]="numberOfGames"></app-stat-item>
+    <app-stat-item label="Number of countries" [value]="numberOfCountries"></app-stat-item>
   </div>
 </section>
-<app-piechart class="chart--section"></app-piechart>
+<app-piechart class="chart--section" (selectedValue)="onSelectedValue($event)" [dataset]="dataset"></app-piechart>

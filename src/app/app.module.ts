@@ -6,6 +6,8 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { PiechartComponent } from "./ui/piechart/piechart.component";
+import { StatItemComponent } from "./ui/stat-item/stat-item.component";
+import { TitleItemComponent } from "./ui/title-item/title-item.component";
 
 @NgModule({
 	declarations: [AppComponent, HomeComponent, NotFoundComponent],
@@ -14,6 +16,8 @@ import { PiechartComponent } from "./ui/piechart/piechart.component";
 		AppRoutingModule,
 		HttpClientModule,
 		PiechartComponent,
+		StatItemComponent,
+		TitleItemComponent,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
