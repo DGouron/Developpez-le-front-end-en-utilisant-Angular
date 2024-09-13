@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 		this.olympics$.subscribe((olympics: Olympic[]) => {
 			this.numberOfGames = this.calculateNumberOfGames(olympics);
 			this.numberOfCountries = this.calculateNumberOfCountries(olympics);
-			this.dataset = olympics.map((item: Olympic) => ({
+			this.dataset = olympics?.map((item: Olympic) => ({
 				name: item.country,
 				value: this.countMedalForCountry(item),
 				extra: {
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	calculateNumberOfGames(olympics: Olympic[]): number {
-		const years = olympics.flatMap((olympic) =>
+		const years = olympics?.flatMap((olympic) =>
 			olympic.participations.map((participation) => participation.year),
 		);
 
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	calculateNumberOfCountries(olympics: Olympic[]): number {
-		return new Set(olympics.map((olympic: Olympic) => olympic.country)).size;
+		return new Set(olympics?.map((olympic: Olympic) => olympic.country)).size;
 	}
 
 	onSelectedValue($event: {
