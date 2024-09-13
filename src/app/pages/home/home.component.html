@@ -1,4 +1,11 @@
 <h2>Olympic games app</h2>
 <hr />
 <p>{{ (olympics$ | async)?.length }} data loaded</p>
-<app-piechart></app-piechart>
+<section class="home--section">
+  <h3 class="title">Medals per Country</h3>
+  <div class="medals--row">
+    <p class="stat"><span class="name">Number of JOs</span><span class="value">{{ numberOfGames }}</span></p>
+    <p class="stat"><span class="name">Number of countries</span><span class="value">{{ numberOfCountries }}</span></p>
+  </div>
+</section>
+<app-piechart class="chart--section"></app-piechart>
