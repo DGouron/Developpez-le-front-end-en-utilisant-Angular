@@ -1,6 +1,6 @@
 import { Component, type OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { type Observable, of } from "rxjs";
+import { type Observable, Subscription, of } from "rxjs";
 import { Data } from "src/app/core/models/Data";
 import { Olympic } from "src/app/core/models/Olympic";
 import { Participation } from "src/app/core/models/Participation";
@@ -13,7 +13,7 @@ import { OlympicService } from "src/app/core/services/olympic.service";
 })
 export class HomeComponent implements OnInit {
 	public olympics$: Observable<Olympic[] | null> = of(null);
-
+	subscriptions: Subscription[] = [];
 	numberOfCountries = 0;
 	numberOfGames = 0;
 	dataset: Data[] = [];
@@ -25,20 +25,26 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.olympics$ = this.olympicService.getOlympics();
-		this.olympics$.subscribe((olympics: Olympic[] | null) => {
-			if (!olympics) {
-				return;
-			}
-			this.numberOfGames = this.calculateNumberOfGames(olympics);
-			this.numberOfCountries = this.calculateNumberOfCountries(olympics);
-			this.dataset = olympics?.map((item: Olympic) => ({
-				name: item.country,
-				value: this.countMedalForCountry(item),
-				extra: {
-					id: item.id,
-				},
-			}));
-		});
+		this.subscriptions.push(
+			this.olympics$.subscribe((olympics: Olympic[] | null) => {
+				if (!olympics) {
+					return;
+				}
+				this.numberOfGames = this.calculateNumberOfGames(olympics);
+				this.numberOfCountries = this.calculateNumberOfCountries(olympics);
+				this.dataset = olympics?.map((item: Olympic) => ({
+					name: item.country,
+					value: this.countMedalForCountry(item),
+					extra: {
+						id: item.id,
+					},
+				}));
+			}),
+		);
+	}
+
+	ngOnDestroy(): void {
+		this.subscriptions.map((sub) => sub.unsubscribe());
 	}
 
 	calculateNumberOfGames(olympics: Olympic[]): number {
@@ -60,7 +66,7 @@ export class HomeComponent implements OnInit {
 	}): void {
 		const id = $event.extra.id;
 		if (id) {
-			this.router.navigate([`/detail/${id}`]);
+			this.router.navigate([`/details/${id}`]);
 		}
 	}
 

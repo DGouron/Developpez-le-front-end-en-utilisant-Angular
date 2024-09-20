@@ -1,14 +1,17 @@
-<section class="detail--section" *ngIf="dataAvailable">
-  <app-title-item [titleToShow]="countryName"></app-title-item>
-  <div class="medals--row">
-    <app-stat-item label="Number of entries" [value]="numberOfEntries"></app-stat-item>
-    <app-stat-item label="Total number medals" [value]="totalNumberMedals"></app-stat-item>
-    <app-stat-item label="Total number of athletes" [value]="totalNumberOfAthletes"></app-stat-item>
-  </div>
-  <button class="button--back" (click)="goBack()">Back</button>
-</section>
+<div *ngIf="dataAvailable" class="detail--container">
+  <section class="detail--section">
+    <app-title-item [titleToShow]="countryName"></app-title-item>
+    <div class="medals--row">
+      <app-stat-item label="Number of entries" [value]="numberOfEntries"></app-stat-item>
+      <app-stat-item label="Total number medals" [value]="totalNumberMedals"></app-stat-item>
+      <app-stat-item label="Total number of athletes" [value]="totalNumberOfAthletes"></app-stat-item>
+    </div>
+  </section>
+  <app-linechart class="linechart--section" [dataset]="dataset"></app-linechart>
+</div>
 <section class="detail--section" *ngIf="!dataAvailable">
   <div class="medals--row">
     <p>...Loading data</p>
   </div>
 </section>
+<button class="button--back" (click)="goBack()">Back</button>

@@ -1,5 +1,10 @@
 export type Data = {
 	name: string;
 	value: number;
-	extra: any;
+	extra?: any;
+};
+
+export type Series = {
+	name: string;
+	series: Data[];
 };

@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { DetailComponent } from "./pages/detail/detail.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
+import { LineChartComponent } from "./ui/linechart/linechart.component";
 import { PiechartComponent } from "./ui/piechart/piechart.component";
 import { StatItemComponent } from "./ui/stat-item/stat-item.component";
 import { TitleItemComponent } from "./ui/title-item/title-item.component";
@@ -22,6 +23,7 @@ import { TitleItemComponent } from "./ui/title-item/title-item.component";
 		AppRoutingModule,
 		HttpClientModule,
 		PiechartComponent,
+		LineChartComponent,
 		StatItemComponent,
 		TitleItemComponent,
 	],
