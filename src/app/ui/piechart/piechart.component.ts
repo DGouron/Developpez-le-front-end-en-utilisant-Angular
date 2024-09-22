@@ -14,13 +14,9 @@ export class PiechartComponent {
 	title = "piechart";
 
 	@Input() dataset: Data[] = [];
-	@Output() selectedValue = new EventEmitter<any>();
+	@Output() selectedValue = new EventEmitter<Data>();
 
-	onSelect(event: {
-		name: string;
-		value: string;
-		extra: any;
-	}): void {
+	onSelect(event: Data): void {
 		this.selectedValue.emit(event);
 	}
 }

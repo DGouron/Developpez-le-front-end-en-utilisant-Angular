@@ -1,7 +1,7 @@
 export type Data = {
 	name: string;
 	value: number;
-	extra?: any;
+	extra?: { id: number };
 };
 
 export type Series = {
