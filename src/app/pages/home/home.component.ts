@@ -59,12 +59,8 @@ export class HomeComponent implements OnInit {
 		return new Set(olympics?.map((olympic: Olympic) => olympic.country)).size;
 	}
 
-	onSelectedValue($event: {
-		name: string;
-		value: string;
-		extra: { id: number };
-	}): void {
-		const id = $event.extra.id;
+	onSelectedValue(event: Data): void {
+		const id = event?.extra?.id;
 		if (id) {
 			this.router.navigate([`/details/${id}`]);
 		}

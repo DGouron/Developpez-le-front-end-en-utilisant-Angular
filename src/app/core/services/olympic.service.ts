@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { Olympic } from "../models/Olympic";
 
@@ -29,21 +29,23 @@ export class OlympicService {
 		return this.olympics$.asObservable();
 	}
 
-	getDetailsById(id: string): Observable<Olympic | null> {
+	getDetailsById(id: string): Observable<Olympic> {
 		return this.olympics$.pipe(
 			map((olympics) => {
 				if (!olympics) {
-					return null;
+					throw new Error("No data available");
 				}
 
 				const foundOlympicData = olympics.find(
 					(olympic: Olympic) => olympic.id.toString() === id,
 				);
-				return foundOlympicData || null;
+				if (!foundOlympicData) {
+					throw new Error("No data available");
+				}
+				return foundOlympicData;
 			}),
 			catchError((error) => {
-				console.error(error);
-				return of(null);
+				throw new Error(error);
 			}),
 		);
 	}

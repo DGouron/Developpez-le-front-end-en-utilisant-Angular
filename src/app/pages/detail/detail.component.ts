@@ -40,26 +40,30 @@ export class DetailComponent implements OnInit {
 	loadDetails(id: string | null): void {
 		if (id) {
 			this.subscriptions.push(
-				this.olympicService.getDetailsById(id).subscribe((details) => {
-					if (!details) {
+				this.olympicService.getDetailsById(id).subscribe(
+					(details) => {
+						if (!details) {
+							return;
+						}
+						this.countryName = details.country;
+						this.numberOfEntries = this.getNumberOfEntries(details);
+						this.totalNumberMedals = this.getTotalNumberMedals(details);
+						this.totalNumberOfAthletes = this.getAthletesCount(details);
+						this.dataAvailable = true;
+						this.dataset = [
+							{
+								name: details.country,
+								series: details.participations.map((participation) => ({
+									name: participation.year.toString(),
+									value: participation.medalsCount,
+								})),
+							},
+						];
+					},
+					(_error) => {
 						this.router.navigate(["/"]);
-						return;
-					}
-					this.countryName = details.country;
-					this.numberOfEntries = this.getNumberOfEntries(details);
-					this.totalNumberMedals = this.getTotalNumberMedals(details);
-					this.totalNumberOfAthletes = this.getAthletesCount(details);
-					this.dataAvailable = true;
-					this.dataset = [
-						{
-							name: details.country,
-							series: details.participations.map((participation) => ({
-								name: participation.year.toString(),
-								value: participation.medalsCount,
-							})),
-						},
-					];
-				}),
+					},
+				),
 			);
 		}
 	}
