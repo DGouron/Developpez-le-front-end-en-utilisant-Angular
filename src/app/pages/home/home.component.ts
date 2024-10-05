@@ -23,6 +23,9 @@ export class HomeComponent implements OnInit {
 		private router: Router,
 	) {}
 
+	/**
+	 *  @description Load the olympics data
+	 */
 	ngOnInit(): void {
 		this.olympics$ = this.olympicService.getOlympics();
 		this.subscriptions.push(
@@ -47,6 +50,11 @@ export class HomeComponent implements OnInit {
 		this.subscriptions.map((sub) => sub.unsubscribe());
 	}
 
+	/**
+	 *  @description Calculate the number of games
+	 *  @param {Olympic[]} olympics - The olympics data
+	 *  @returns {number} - The number of games
+	 */
 	calculateNumberOfGames(olympics: Olympic[]): number {
 		const years = olympics?.flatMap((olympic) =>
 			olympic.participations.map((participation) => participation.year),
@@ -55,10 +63,19 @@ export class HomeComponent implements OnInit {
 		return new Set(years).size;
 	}
 
+	/**
+	 *  @description Calculate the number of countries
+	 *  @param {Olympic[]} olympics - The olympics data
+	 *  @returns {number} - The number of countries
+	 */
 	calculateNumberOfCountries(olympics: Olympic[]): number {
 		return new Set(olympics?.map((olympic: Olympic) => olympic.country)).size;
 	}
 
+	/**
+	 *  @description Navigate to the details page
+	 *  @param {Data} event - The event data
+	 */
 	onSelectedValue(event: Data): void {
 		const id = event?.extra?.id;
 		if (id) {
@@ -66,6 +83,11 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
+	/**
+	 *  @description Count the number of medals for a country
+	 *  @param {Olympic} country - The country data
+	 *  @returns {number} - The number of medals
+	 */
 	countMedalForCountry(country: Olympic): number {
 		const participations: Participation[] = country.participations;
 		return participations.reduce((acc, participation) => {

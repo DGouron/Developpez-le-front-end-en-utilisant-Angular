@@ -37,6 +37,10 @@ export class DetailComponent implements OnInit {
 		this.subscriptions.map((sub) => sub.unsubscribe());
 	}
 
+	/**
+	 *  @description Load the details of the olympic by id
+	 *  @param {string | null} id - The id of the olympic to load
+	 */
 	loadDetails(id: string | null): void {
 		if (id) {
 			this.subscriptions.push(
@@ -68,10 +72,20 @@ export class DetailComponent implements OnInit {
 		}
 	}
 
+	/**
+	 *  @description Get the number of entries of the olympic
+	 *  @param {Olympic} data - The olympic data
+	 *  @returns {number} - The number of entries
+	 */
 	getNumberOfEntries(data: Olympic): number {
 		return data.participations.length;
 	}
 
+	/**
+	 *  @description Get the total number of medals of the olympic
+	 *  @param {Olympic} data - The olympic data
+	 *  @returns {number} - The total number of medals
+	 */
 	getTotalNumberMedals(data: Olympic): number {
 		return data.participations.reduce(
 			(acc, curr: Participation) => acc + curr.medalsCount,
@@ -79,6 +93,11 @@ export class DetailComponent implements OnInit {
 		);
 	}
 
+	/**
+	 *  @description Get the total number of athletes of the olympic
+	 *  @param {Olympic} data - The olympic data
+	 *  @returns {number} - The total number of athletes
+	 */
 	getAthletesCount(data: Olympic): number {
 		return data.participations.reduce(
 			(acc, curr: Participation) => acc + curr.athleteCount,
@@ -86,6 +105,9 @@ export class DetailComponent implements OnInit {
 		);
 	}
 
+	/**
+	 *  @description Go back to the home page
+	 */
 	goBack(): void {
 		this.router.navigate(["/"]);
 	}

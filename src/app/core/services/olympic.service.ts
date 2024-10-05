@@ -13,6 +13,10 @@ export class OlympicService {
 
 	constructor(private http: HttpClient) {}
 
+	/**
+	 *  @description Load the olympics data
+	 *  @returns {Observable<Olympic[]>} - The olympics data
+	 */
 	loadInitialData() {
 		return this.http.get<Olympic[]>(this.olympicUrl).pipe(
 			tap((value) => this.olympics$.next(value)),
@@ -25,10 +29,19 @@ export class OlympicService {
 		);
 	}
 
+	/**
+	 *  @description Get the olympics data
+	 *  @returns {Observable<Olympic[] | null>} - The olympics data
+	 */
 	getOlympics(): Observable<Olympic[] | null> {
 		return this.olympics$.asObservable();
 	}
 
+	/**
+	 *  @description Get the details of the olympic by id
+	 *  @param {string} id - The id of the olympic to load
+	 *  @returns {Observable<Olympic>} - The olympic data
+	 */
 	getDetailsById(id: string): Observable<Olympic> {
 		return this.olympics$.pipe(
 			map((olympics) => {
